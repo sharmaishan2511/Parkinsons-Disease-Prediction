@@ -4,6 +4,11 @@ from dataclasses import dataclass
 
 from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+
 
 from src.exception import CustomException
 from src.logger import logging
@@ -26,6 +31,10 @@ class ModelTrainer:
             models = {
                 "Random Forest": RandomForestClassifier(criterion="entropy"),
                 "XGBRegressor": XGBClassifier(),
+                "LogisticRegression" : LogisticRegression(),
+                "NB" : GaussianNB(),
+                "kernel SVM" : SVC(kernel = 'rbf'),
+                "KNN" : KNeighborsClassifier(n_neighbors = 2, metric = 'minkowski', p = 2)
             }
 
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
@@ -49,9 +58,12 @@ class ModelTrainer:
                 obj=best_model
             )
 
-            predicted=best_model.predict(X_test)
+            predicted_test=best_model.predict(X_test)
+            predicted_train=best_model.predict(X_train)
 
-            r2_square = accuracy_score(y_test, predicted)
-            return r2_square
+
+            acctest = accuracy_score(y_test, predicted_test)
+            acctrain = accuracy_score(y_train, predicted_train)
+            return [acctrain,acctest]
         except Exception as e:
             raise CustomException(e,sys)
