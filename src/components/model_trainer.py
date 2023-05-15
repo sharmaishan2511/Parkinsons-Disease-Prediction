@@ -34,7 +34,7 @@ class ModelTrainer:
                 "LogisticRegression" : LogisticRegression(),
                 "NB" : GaussianNB(),
                 "kernel SVM" : SVC(kernel = 'rbf'),
-                "KNN" : KNeighborsClassifier(n_neighbors = 2, metric = 'minkowski', p = 2)
+                "KNN" : KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
             }
 
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
