@@ -16,6 +16,7 @@ def select_lasso(X_train,y_train):
         feature_sel_model = SelectFromModel(Lasso(alpha=0.005, random_state=0)) # remember to set the seed, the random state in this function
         feature_sel_model.fit(X_train, y_train)
         selected_feat = X_train.columns[(feature_sel_model.get_support())]
+        print(selected_feat)
         return selected_feat
     except Exception as e:
         return (e,sys)
