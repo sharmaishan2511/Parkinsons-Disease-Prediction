@@ -30,7 +30,6 @@ def predict_datapoint():
         input_data = np.array([fo_hz, fhi_hz, flo_hz, hnr, spread1, d2]).reshape(1, -1)
 
         result = model.predict(input_data)
-        print(result)
         return render_template('home.html', result=result)
 
 
