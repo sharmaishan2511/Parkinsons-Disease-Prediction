@@ -8,4 +8,6 @@ dill
 flask
 pytest
 joblib
+gunicorn
+fcntl
 -e .

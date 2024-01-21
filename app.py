@@ -6,7 +6,7 @@ import joblib
 
 application = Flask(__name__)
 
-model = joblib.load('artifacts/model.pkl')
+model = joblib.load('model.pkl')
 
 app = application
 
