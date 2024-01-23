@@ -1,4 +1,5 @@
 import pandas as pd
+import pickle
 import numpy as np
 from flask import Flask, request, render_template
 from sklearn.preprocessing import StandardScaler
@@ -6,7 +7,7 @@ import joblib
 
 application = Flask(__name__)
 
-model = joblib.load('model.pkl')
+model = pickle.load(open('model.pkl','rb'))
 
 app = application
 
