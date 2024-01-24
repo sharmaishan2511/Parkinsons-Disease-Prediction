@@ -6,7 +6,9 @@ scikit-learn
 xgboost
 dill
 keras
-sklearn
+scikit-learn
+pandas
+numpy
 flask
 pytest
 pickle-mixin
