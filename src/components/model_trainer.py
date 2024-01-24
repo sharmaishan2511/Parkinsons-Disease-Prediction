@@ -61,7 +61,7 @@ class ModelTrainer:
             predicted_test=best_model.predict(X_test)
             predicted_train=best_model.predict(X_train)
 
-
+            print(best_model)
             acctest = accuracy_score(y_test, predicted_test)
             acctrain = accuracy_score(y_train, predicted_train)
             return [acctrain,acctest]

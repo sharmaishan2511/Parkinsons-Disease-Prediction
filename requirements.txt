@@ -5,6 +5,8 @@ seaborn
 scikit-learn
 xgboost
 dill
+keras
+sklearn
 flask
 pytest
 pickle-mixin
