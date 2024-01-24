@@ -37,6 +37,7 @@ class ModelTrainer:
                 "KNN" : KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
             }
 
+            print(X_train[0])
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
                                              models=models)
             
@@ -64,6 +65,6 @@ class ModelTrainer:
             print(best_model)
             acctest = accuracy_score(y_test, predicted_test)
             acctrain = accuracy_score(y_train, predicted_train)
-            return [acctrain,acctest]
+            return best_model
         except Exception as e:
             raise CustomException(e,sys)

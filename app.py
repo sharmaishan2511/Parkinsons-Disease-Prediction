@@ -4,9 +4,9 @@ import numpy as np
 from flask import Flask, request, render_template
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-
-
-model = RandomForestClassifier(criterion="entropy")
+from src.components.data_ingestion import DataIngestion
+from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 
 application = Flask(__name__)
 
@@ -35,9 +35,17 @@ def predict_datapoint():
         })
 
         # Use the loaded scaler to transform the input data
+        obj=DataIngestion()
+        X_train,X_test,y_train,y_test=obj.initiate_data_ingestion()
+
+        data_transformation=DataTransformation()
+        X_train, X_test, y_train, y_test,_ = data_transformation.initiate_data_transformation(X_train,X_test,y_train,y_test)
+
+        modeltrainer=ModelTrainer()
+        model = modeltrainer.initiate_model_trainer(X_train,X_test,y_train,y_test)
+
         scaler = StandardScaler()
         input_scaled = scaler.fit_transform(input_df)
-
         result = model.predict(input_scaled)
         if result == 1:
             result_message = "The parameters indicate Parkinson's Disease."
