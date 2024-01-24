@@ -3,11 +3,12 @@ import pickle
 import numpy as np
 from flask import Flask, request, render_template
 from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+
+
+model = RandomForestClassifier(criterion="entropy")
 
 application = Flask(__name__)
-
-with open('model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
 
 app = application
 
